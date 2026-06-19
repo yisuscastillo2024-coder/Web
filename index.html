@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesas Santandereanas | Inspirando el Deporte Regional</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter & Syne for sporty, modern headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons for sports & socials -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for interactive cheering -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        santander: {
+                            green: '#005C3E',
+                            gold: '#FFD700',
+                            goldDark: '#C5A000',
+                            dark: '#0B130E',
+                            card: '#131F18',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Syne', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom animations */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B130E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #005C3E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
+        /* Sound waves animation */
+        .bar {
+            display: inline-block;
+            width: 3px;
+            height: 20px;
+            background-color: #FFD700;
+            margin: 0 2px;
+            border-radius: 10px;
+            animation: bounce 1s ease-in-out infinite alternate;
+        }
+        .bar:nth-child(2) { animation-delay: 0.2s; }
+        .bar:nth-child(3) { animation-delay: 0.4s; }
+        .bar:nth-child(4) { animation-delay: 0.1s; }
+        .bar:nth-child(5) { animation-delay: 0.3s; }
+        @keyframes bounce {
+            10% { height: 5px; }
+            50% { height: 28px; }
+            100% { height: 10px; }
+        }
+        /* Image hover glow effect */
+        .img-glow {
+            transition: all 0.5s ease;
+        }
+        .img-glow:hover {
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-santander-dark text-gray-100 font-sans overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 w-full z-50 bg-santander-dark/90 backdrop-blur-md border-b border-santander-green/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <img src="WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/150x150/005C3E/FFD700?text=PS';" 
+                     alt="Logo Promesas Santandereanas" 
+                     class="h-14 w-14 rounded-full object-cover border-2 border-santander-gold group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                     onclick="openLightbox('WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg', 'Logo Oficial', 'Promesas Santandereanas', 'Símbolo del orgullo deportivo de nuestra región.')">
+                <div>
+                    <span class="font-heading text-lg font-bold tracking-wider text-white block leading-tight">PROMESAS</span>
+                    <span class="text-xs text-santander-gold font-semibold tracking-widest uppercase">Santandereanas</span>
+                </div>
+            </a>
+            
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#inicio" class="text-sm font-medium hover:text-santander-gold transition-colors duration-200">Inicio</a>
+                <a href="#sobre-nosotros" class="text-sm font-medium hover:text-santander-gold transition-colors duration-200">Sobre Nosotros</a>
+                <a href="#atletas" class="text-sm font-medium hover:text-santander-gold transition-colors duration-200">Promesas</a>
+                <a href="#podcast" class="text-sm font-medium hover:text-santander-gold transition-colors duration-200">Contenido Digital</a>
+                <a href="#contacto" class="text-sm font-medium hover:text-santander-gold transition-colors duration-200">Contacto</a>
+            </nav>
+
+            <!-- Social Links Panel (Header) -->
+            <div class="hidden lg:flex items-center space-x-4">
+                <a href="https://www.instagram.com/promesas_santandereanas?igsh=MTM1eHJzczJyNXUzeQ%3D%3D&utm_source=qr" target="_blank" class="h-9 w-9 flex items-center justify-center rounded-full bg-santander-card border border-santander-green hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@promesassantandereanas?_r=1&_t=ZS-97Lg2JEpWTc" target="_blank" class="h-9 w-9 flex items-center justify-center rounded-full bg-santander-card border border-santander-green hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://open.spotify.com/show/033k5B9xaVOEMFF71iQrPd?si=8bMwEY2VSyioSYmjfa1WdA" target="_blank" class="h-9 w-9 flex items-center justify-center rounded-full bg-santander-card border border-santander-green hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="#contacto" class="bg-santander-green hover:bg-emerald-700 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-santander-green/30 hover:shadow-santander-green/50 transition-all duration-300">Apoyar</a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-white hover:text-santander-gold focus:outline-none" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-santander-dark border-b border-santander-green/30 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-santander-gold py-2 text-base font-semibold">Inicio</a>
+            <a href="#sobre-nosotros" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-santander-gold py-2 text-base font-semibold">Sobre Nosotros</a>
+            <a href="#atletas" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-santander-gold py-2 text-base font-semibold">Promesas</a>
+            <a href="#podcast" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-santander-gold py-2 text-base font-semibold">Contenido Digital</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-santander-gold py-2 text-base font-semibold">Contacto</a>
+            <div class="pt-4 flex space-x-4 border-t border-santander-green/20">
+                <a href="https://www.instagram.com/promesas_santandereanas?igsh=MTM1eHJzczJyNXUzeQ%3D%3D&utm_source=qr" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card text-gray-300"><i class="fab fa-instagram text-lg"></i></a>
+                <a href="https://www.tiktok.com/@promesassantandereanas?_r=1&_t=ZS-97Lg2JEpWTc" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card text-gray-300"><i class="fab fa-tiktok text-lg"></i></a>
+                <a href="https://open.spotify.com/show/033k5B9xaVOEMFF71iQrPd?si=8bMwEY2VSyioSYmjfa1WdA" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card text-gray-300"><i class="fab fa-spotify text-lg"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-24 lg:pt-44 lg:pb-36 flex items-center overflow-hidden">
+        <!-- Abstract background elements -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,92,62,0.15),transparent_50%)]"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-santander-gold/5 rounded-full blur-3xl animate-pulse-slow"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-santander-green/35 border border-santander-green px-4 py-2 rounded-full backdrop-blur-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-santander-gold animate-ping"></span>
+                        <span class="text-xs sm:text-sm font-bold tracking-wide uppercase text-santander-gold">El futuro dorado del deporte es hoy</span>
+                    </div>
+                    
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                        Detrás de cada deportista hay una <span class="text-transparent bg-clip-text bg-gradient-to-r from-santander-gold to-yellow-300">historia de grandeza</span>.
+                    </h1>
+                    
+                    <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0">
+                        Nuestra pasión es visibilizar, inspirar y apoyar a los jóvenes talentos de Santander, impulsando sus carreras y documentando su camino hacia la cima del deporte mundial.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#atletas" class="w-full sm:w-auto text-center bg-gradient-to-r from-santander-gold to-yellow-500 text-santander-dark font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-santander-gold/20 hover:scale-105 transition-all duration-300">
+                            Conocer Promesas <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#sobre-nosotros" class="w-full sm:w-auto text-center border border-santander-green/80 hover:bg-santander-green/10 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300">
+                            Nuestra Misión
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Graphic/Logo Frame -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group max-w-sm sm:max-w-md w-full">
+                        <!-- Frame glow -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-santander-green to-santander-gold rounded-3xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500"></div>
+                        
+                        <!-- Main Logo Image Container -->
+                        <div class="relative bg-santander-card border-2 border-santander-green/40 p-5 rounded-3xl overflow-hidden shadow-2xl img-glow">
+                            <div class="relative overflow-hidden rounded-2xl group/img">
+                                <img src="WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/500x600/005C3E/FFD700?text=Promesas+Santandereanas';" 
+                                     alt="Logo Promesas Santandereanas" 
+                                     class="w-full h-auto object-contain transform group-hover/img:scale-105 transition-all duration-500 shadow-inner">
+                                <!-- Hover visualizer overlay -->
+                                <div onclick="openLightbox('WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg', 'Proyecto Oficial', 'Promesas Santandereanas', 'Diseño de identidad visual que enorgullece y reúne las disciplinas más apasionantes de nuestra juventud.')" 
+                                     class="absolute inset-0 bg-black/60 opacity-0 group-hover/img:opacity-100 flex flex-col items-center justify-center transition-all duration-300 cursor-pointer text-center p-4">
+                                    <div class="h-12 w-12 rounded-full bg-santander-gold flex items-center justify-center text-santander-dark mb-2 shadow-lg">
+                                        <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
+                                    </div>
+                                    <span class="text-xs text-white font-bold tracking-widest uppercase">Ver Detalle del Escudo</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 bg-santander-dark/90 p-4 rounded-xl border border-santander-gold/30 flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] text-santander-gold font-bold tracking-widest uppercase">PROYECTO OFICIAL</p>
+                                    <h3 class="text-sm font-bold text-white">#PromesasSantandereanas</h3>
+                                </div>
+                                <span class="bg-santander-green text-white font-bold text-[10px] px-2.5 py-1 rounded-full">Santander, CO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Showcase (Quick Stats) -->
+    <section class="border-y border-santander-green/30 bg-santander-card/50 py-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="space-y-1">
+                    <h4 class="text-4xl font-heading font-extrabold text-santander-gold">3</h4>
+                    <p class="text-sm uppercase tracking-widest text-gray-400 font-bold">Atletas de Alto Rendimiento</p>
+                </div>
+                <div class="space-y-1 border-y md:border-y-0 md:border-x border-santander-green/30 py-6 md:py-0">
+                    <h4 class="text-4xl font-heading font-extrabold text-santander-gold">100%</h4>
+                    <p class="text-sm uppercase tracking-widest text-gray-400 font-bold">Orgullo Santandereano</p>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="text-4xl font-heading font-extrabold text-white flex items-center justify-center">
+                        <i class="fa-solid fa-globe text-santander-gold mr-3"></i> MUNDIAL
+                    </h4>
+                    <p class="text-sm uppercase tracking-widest text-gray-400 font-bold">Alcance de Nuestras Promesas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros Section -->
+    <section id="sobre-nosotros" class="py-24 relative overflow-hidden bg-[radial-gradient(circle_at_right_bottom,rgba(0,92,62,0.1),transparent_40%)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-xs uppercase tracking-widest text-santander-gold font-extrabold">Sobre Nosotros</h2>
+                <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Nuestra causa por el deporte regional</h3>
+                <div class="w-24 h-1 bg-gradient-to-r from-santander-gold to-yellow-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Tabs/Selector Navigation for Mission, Vision, Purpose -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-santander-card/80 border border-santander-green/30 p-1.5 rounded-2xl flex flex-wrap justify-center gap-2 max-w-2xl w-full">
+                    <button onclick="switchTab('mision')" id="btn-mision" class="flex-1 min-w-[120px] px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 bg-santander-green text-white shadow-md">
+                        Misión
+                    </button>
+                    <button onclick="switchTab('vision')" id="btn-vision" class="flex-1 min-w-[120px] px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 text-gray-400 hover:text-white">
+                        Visión
+                    </button>
+                    <button onclick="switchTab('proposito')" id="btn-proposito" class="flex-1 min-w-[120px] px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 text-gray-400 hover:text-white">
+                        Propósito
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Contents Card -->
+            <div class="max-w-4xl mx-auto bg-santander-card/60 backdrop-blur-md border-2 border-santander-green/30 p-8 sm:p-12 rounded-3xl shadow-xl transition-all duration-500">
+                <!-- MISSION CONTENT -->
+                <div id="content-mision" class="space-y-6 tab-content animate-fadeIn">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="bg-santander-green/30 border border-santander-green/50 p-6 rounded-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-bullseye text-5xl text-santander-gold"></i>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-heading text-2xl font-bold text-white">Nuestra Misión</h4>
+                            <p class="text-gray-300 text-lg leading-relaxed">
+                                Visibilizar, inspirar y apoyar a los jóvenes deportistas de Santander mediante la creación de contenido audiovisual y digital que dé a conocer sus historias, procesos, logros y desafíos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VISION CONTENT -->
+                <div id="content-vision" class="hidden space-y-6 tab-content animate-fadeIn">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="bg-santander-green/30 border border-santander-green/50 p-6 rounded-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-eye text-5xl text-santander-gold"></i>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-heading text-2xl font-bold text-white">Nuestra Visión</h4>
+                            <p class="text-gray-300 text-lg leading-relaxed">
+                                Ser la plataforma de referencia para la promoción del talento deportivo santandereano, reconocida por conectar a deportistas, familias, entrenadores y clubes, contribuyendo al crecimiento del deporte regional y al desarrollo de nuevas generaciones de atletas que inspiren al departamento de Santander.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PURPOSE CONTENT -->
+                <div id="content-proposito" class="hidden space-y-6 tab-content animate-fadeIn">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="bg-santander-green/30 border border-santander-green/50 p-6 rounded-2xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-heart text-5xl text-santander-gold"></i>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-heading text-2xl font-bold text-white">Nuestro Propósito</h4>
+                            <p class="text-gray-300 text-lg leading-relaxed">
+                                Creemos que detrás de cada deportista hay una historia que merece ser contada. Nuestro propósito es convertir esas historias en una fuente de inspiración y reconocimiento, mostrando el esfuerzo, la disciplina y los sueños de los atletas santandereanos para contribuir a la construcción de un futuro con más oportunidades para el deporte regional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atletas Section -->
+    <section id="atletas" class="py-24 relative bg-santander-card/30">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_left_top,rgba(255,215,0,0.03),transparent_40%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-xs uppercase tracking-widest text-santander-gold font-extrabold">Perfiles de Impacto</h2>
+                <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Nuestras Promesas</h3>
+                <p class="text-gray-300 max-w-xl mx-auto text-md">
+                    Descubre las extraordinarias historias, disciplina y metas de los deportistas que representan con orgullo al departamento de Santander. Haz clic en sus fotos para verlas en pantalla completa.
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-santander-gold to-yellow-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Athlete Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Athlete 1: Gabriela Ortega -->
+                <div class="bg-santander-card border-2 border-santander-green/20 rounded-3xl overflow-hidden shadow-xl hover:border-santander-gold/40 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full group">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <!-- High performance Athlete Image -->
+                        <img src="Gimnasta Trampolin.jpg" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x800/005C3E/FFD700?text=Gabriela+Ortega';" 
+                             alt="Gabriela Ortega - Gimnasia de Trampolín" 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Overlay overlay on hover to view full photo -->
+                        <div onclick="openLightbox('Gimnasta Trampolin.jpg', 'Gabriela Ortega', 'Gimnasia de Trampolín (13 Años)', 'Selección Santander, destacada en campeonatos nacionales y sudamericanos. Logró subir al podio de honor en la competencia mundial de Praga 2025.')"
+                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-all duration-300 cursor-pointer text-center p-4">
+                            <div class="h-12 w-12 rounded-full bg-santander-gold flex items-center justify-center text-santander-dark mb-2 shadow-lg">
+                                <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
+                            </div>
+                            <span class="text-xs text-white font-bold tracking-widest uppercase">Ver Foto de Gabriela</span>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-santander-dark via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-santander-gold text-santander-dark font-black text-xs px-3 py-1.5 rounded-full uppercase tracking-widest shadow">
+                            13 Años
+                        </span>
+                        <div class="absolute bottom-4 left-4 pointer-events-none">
+                            <span class="bg-santander-green text-white font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider block w-max mb-1.5 shadow-sm">Gimnasia de Trampolín</span>
+                            <h4 class="font-heading text-2xl font-bold text-white shadow-sm">Gabriela Ortega</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6 flex-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div>
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-trophy mr-1.5"></i> Logros Destacados
+                                </h5>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Selección Santander de Gimnasia</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Competidora constante en campeonatos nacionales</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Presente en Campeonato Sudamericano</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Podio mundial alcanzado en Praga 2025</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-santander-green/20">
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-flag-checkered mr-1.5"></i> Gran Meta
+                                </h5>
+                                <p class="text-sm font-semibold text-white bg-santander-green/20 px-3 py-2 rounded-lg border border-santander-green/40 flex items-center">
+                                    <i class="fa-solid fa-medal text-santander-gold mr-2 text-md"></i> Clasificar e ir a los Juegos Olímpicos
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Interaction Block -->
+                        <div class="pt-6 border-t border-santander-green/20 space-y-3">
+                            <div class="flex items-center justify-between text-xs font-semibold text-gray-400">
+                                <span>Apoyo del público</span>
+                                <span class="text-santander-gold font-bold"><span id="cheer-count-gabriela">1,342</span> voces de aliento</span>
+                            </div>
+                            <button onclick="sendCheer('gabriela')" class="w-full bg-santander-green hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-300">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span>¡Alentar a Gabriela!</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Athlete 2: Mariana Valdivieso -->
+                <div class="bg-santander-card border-2 border-santander-green/20 rounded-3xl overflow-hidden shadow-xl hover:border-santander-gold/40 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full group">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <!-- High performance Athlete Image -->
+                        <img src="Nadadora.jpeg" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x800/005C3E/FFD700?text=Mariana+Valdivieso';" 
+                             alt="Mariana Valdivieso - Natación" 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Overlay overlay on hover to view full photo -->
+                        <div onclick="openLightbox('Nadadora.jpeg', 'Mariana Valdivieso', 'Natación (15 Años)', 'Integrante de la Selección Santander, competidora en los prestigiosos Juegos Nacionales y medallista de bronce sudamericana en relevos femeninos.')"
+                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-all duration-300 cursor-pointer text-center p-4">
+                            <div class="h-12 w-12 rounded-full bg-santander-gold flex items-center justify-center text-santander-dark mb-2 shadow-lg">
+                                <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
+                            </div>
+                            <span class="text-xs text-white font-bold tracking-widest uppercase">Ver Foto de Mariana</span>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-santander-dark via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-santander-gold text-santander-dark font-black text-xs px-3 py-1.5 rounded-full uppercase tracking-widest shadow">
+                            15 Años
+                        </span>
+                        <div class="absolute bottom-4 left-4 pointer-events-none">
+                            <span class="bg-santander-green text-white font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider block w-max mb-1.5 shadow-sm">Natación</span>
+                            <h4 class="font-heading text-2xl font-bold text-white shadow-sm">Mariana Valdivieso</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6 flex-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div>
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-trophy mr-1.5"></i> Logros Destacados
+                                </h5>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Selección Santander de Natación</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Participante en los Juegos Nacionales</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Destacada en Sudamericano Escolar</li>
+                                    <li class="flex items-start font-medium text-emerald-400"><span class="text-santander-gold mr-2">✦</span>Medalla de bronce en relevos mujeres</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-santander-green/20">
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-flag-checkered mr-1.5"></i> Gran Meta
+                                </h5>
+                                <p class="text-sm font-semibold text-white bg-santander-green/20 px-3 py-2 rounded-lg border border-santander-green/40 flex items-center">
+                                    <i class="fa-solid fa-medal text-santander-gold mr-2 text-md"></i> Competir en unos Juegos Olímpicos
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Interaction Block -->
+                        <div class="pt-6 border-t border-santander-green/20 space-y-3">
+                            <div class="flex items-center justify-between text-xs font-semibold text-gray-400">
+                                <span>Apoyo del público</span>
+                                <span class="text-santander-gold font-bold"><span id="cheer-count-mariana">2,108</span> voces de aliento</span>
+                            </div>
+                            <button onclick="sendCheer('mariana')" class="w-full bg-santander-green hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-300">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span>¡Alentar a Mariana!</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Athlete 3: Sebastián Grandas -->
+                <div class="bg-santander-card border-2 border-santander-green/20 rounded-3xl overflow-hidden shadow-xl hover:border-santander-gold/40 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full group">
+                    <div class="relative aspect-[3/4] overflow-hidden">
+                        <!-- High performance Athlete Image -->
+                        <img src="BMX.jpg" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x800/005C3E/FFD700?text=Sebastian+Grandas';" 
+                             alt="Sebastián Grandas - BMX" 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Overlay overlay on hover to view full photo -->
+                        <div onclick="openLightbox('BMX.jpg', 'Sebastián Grandas', 'BMX (21 Años)', 'Un atleta consolidado en los circuitos de BMX. Representante del departamento en copas del mundo, panamericanos, latinoamericanos y torneos nacionales.')"
+                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-all duration-300 cursor-pointer text-center p-4">
+                            <div class="h-12 w-12 rounded-full bg-santander-gold flex items-center justify-center text-santander-dark mb-2 shadow-lg">
+                                <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
+                            </div>
+                            <span class="text-xs text-white font-bold tracking-widest uppercase">Ver Foto de Sebastián</span>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-santander-dark via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-santander-gold text-santander-dark font-black text-xs px-3 py-1.5 rounded-full uppercase tracking-widest shadow">
+                            21 Años
+                        </span>
+                        <div class="absolute bottom-4 left-4 pointer-events-none">
+                            <span class="bg-santander-green text-white font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider block w-max mb-1.5 shadow-sm">BMX</span>
+                            <h4 class="font-heading text-2xl font-bold text-white shadow-sm">Sebastián Grandas</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-6 flex-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div>
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-trophy mr-1.5"></i> Logros Destacados
+                                </h5>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Trayectoria impecable en departamentales y nacionales</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Representación en latinoamericanos y panamericanos</li>
+                                    <li class="flex items-start"><span class="text-santander-gold mr-2">✦</span>Competidor internacional en Copas del Mundo BMX</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-santander-green/20">
+                                <h5 class="text-xs uppercase tracking-widest text-santander-gold font-bold mb-2 flex items-center">
+                                    <i class="fa-solid fa-flag-checkered mr-1.5"></i> Gran Meta
+                                </h5>
+                                <p class="text-sm font-semibold text-white bg-santander-green/20 px-3 py-2 rounded-lg border border-santander-green/40 flex items-center">
+                                    <i class="fa-solid fa-earth-americas text-santander-gold mr-2 text-md"></i> Copa del Mundo en China y Estados Unidos
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Interaction Block -->
+                        <div class="pt-6 border-t border-santander-green/20 space-y-3">
+                            <div class="flex items-center justify-between text-xs font-semibold text-gray-400">
+                                <span>Apoyo del público</span>
+                                <span class="text-santander-gold font-bold"><span id="cheer-count-sebastian">1,947</span> voces de aliento</span>
+                            </div>
+                            <button onclick="sendCheer('sebastian')" class="w-full bg-santander-green hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-300">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span>¡Alentar a Sebastián!</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PHOTO LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-santander-gold text-3xl focus:outline-none transition-colors" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full bg-santander-card border border-santander-green/30 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+            <!-- Full size image container -->
+            <div class="md:w-1/2 bg-black flex items-center justify-center min-h-[300px] md:min-h-[500px]">
+                <img id="lightbox-img" src="" alt="Deportista" class="max-w-full max-h-[80vh] object-contain">
+            </div>
+            <!-- Profile description details inside Lightbox -->
+            <div class="md:w-1/2 p-8 flex flex-col justify-between space-y-6">
+                <div>
+                    <span id="lightbox-tag" class="text-xs uppercase tracking-widest text-santander-gold font-extrabold block mb-2"></span>
+                    <h3 id="lightbox-title" class="font-heading text-3xl font-extrabold text-white"></h3>
+                    <div class="w-12 h-1 bg-santander-gold mt-3 mb-6 rounded-full"></div>
+                    <p id="lightbox-desc" class="text-gray-300 text-sm leading-relaxed"></p>
+                </div>
+                <div class="pt-6 border-t border-santander-green/20 flex flex-col space-y-4">
+                    <p class="text-xs text-gray-400">Estas fotos representan la tenacidad y pasión que vive en Santander. Compártelas para aumentar su visibilidad nacional e internacional.</p>
+                    <div class="flex gap-3">
+                        <button onclick="closeLightbox()" class="flex-1 bg-santander-green hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-center text-sm transition-all duration-200">
+                            Volver al Portal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Podcasts & Contenido Digital Section -->
+    <section id="podcast" class="py-24 relative overflow-hidden bg-santander-dark">
+        <!-- background circle -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-santander-green/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Column -->
+                <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
+                    <h2 class="text-xs uppercase tracking-widest text-santander-gold font-extrabold">Contenido Digital</h2>
+                    <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Escucha Sus Historias</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        A través de nuestro canal y podcast oficial en **Spotify**, abrimos un espacio único para conocer de cerca a nuestros deportistas: sus risas, lágrimas, miedos, desafíos y el increíble esfuerzo detrás de cada medalla.
+                    </p>
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://open.spotify.com/show/033k5B9xaVOEMFF71iQrPd?si=8bMwEY2VSyioSYmjfa1WdA" target="_blank" class="w-full sm:w-auto text-center bg-[#1ED760] hover:bg-[#1db954] text-black font-extrabold px-6 py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-transform duration-300 hover:scale-105 shadow-lg shadow-[#1ED760]/20">
+                            <i class="fab fa-spotify text-xl"></i>
+                            <span>Ir al Podcast Oficial</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@promesassantandereanas?_r=1&_t=ZS-97Lg2JEpWTc" target="_blank" class="w-full sm:w-auto text-center bg-santander-card border border-santander-green text-white font-bold px-6 py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-transform duration-300 hover:scale-105">
+                            <i class="fab fa-tiktok text-md"></i>
+                            <span>Síguenos en TikTok</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Podcast Player Mockup -->
+                <div class="lg:col-span-7">
+                    <div class="bg-santander-card border-2 border-santander-green/35 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+                        <div class="absolute -top-3 right-8 bg-santander-gold text-santander-dark text-[10px] font-black tracking-widest px-3 py-1 rounded-full uppercase">
+                            Episodio Destacado
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <div class="relative w-36 h-36 shrink-0 rounded-2xl overflow-hidden shadow-md group/cover">
+                                <img src="WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg" 
+                                     onerror="this.onerror=null; this.src='https://placehold.co/300x300/005C3E/FFD700?text=Podcast+Promesas';" 
+                                     alt="Carátula Promesas" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/45 flex items-center justify-center">
+                                    <button onclick="playPodcastSim()" class="bg-santander-gold hover:bg-white text-santander-dark w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                        <i class="fa-solid fa-play text-lg ml-1" id="play-btn-icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3 text-center sm:text-left flex-1 w-full">
+                                <div class="flex items-center justify-center sm:justify-between">
+                                    <span class="text-xs text-santander-gold font-extrabold uppercase tracking-widest">Temporada 1 • Episodio 1</span>
+                                    <span class="hidden sm:inline-flex items-center text-xs text-gray-400 font-semibold bg-santander-dark px-2 py-1 rounded-md">
+                                        <i class="fa-solid fa-headphones mr-1 text-santander-gold"></i> 4,5k Oyentes
+                                    </span>
+                                </div>
+                                <h4 class="font-heading text-xl font-bold text-white">El camino hacia la gloria internacional</h4>
+                                <p class="text-sm text-gray-300">
+                                    Un recorrido emocionante con nuestros atletas compartiendo cómo es entrenar con el corazón bajo la bandera santandereana.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Player Simulation Controls -->
+                        <div class="mt-8 pt-6 border-t border-santander-green/20 space-y-4">
+                            <!-- Progress Bar -->
+                            <div class="space-y-1.5">
+                                <div class="w-full h-1 bg-santander-dark rounded-full overflow-hidden relative">
+                                    <div id="sim-progress" class="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-santander-gold to-yellow-400 rounded-full transition-all duration-300"></div>
+                                </div>
+                                <div class="flex items-center justify-between text-[11px] text-gray-400 font-semibold">
+                                    <span id="curr-time">01:45</span>
+                                    <!-- Sound Wave Visualizer (only active when playing) -->
+                                    <div class="hidden" id="wave-visualizer">
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                        <span class="bar"></span>
+                                    </div>
+                                    <span>05:30</span>
+                                </div>
+                            </div>
+
+                            <!-- Mock Tracks List -->
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-santander-dark/60 hover:bg-santander-dark border border-transparent hover:border-santander-green/30 transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-xs font-bold text-santander-gold">01</span>
+                                        <span class="text-sm font-semibold text-white">Gabriela Ortega: De Santander al podio mundial</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400">14:22 mins</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-santander-dark/60 hover:bg-santander-dark border border-transparent hover:border-santander-green/30 transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-xs font-bold text-santander-gold">02</span>
+                                        <span class="text-sm font-semibold text-white">Mariana Valdivieso: El agua corre por mis venas</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400">18:05 mins</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-santander-dark/60 hover:bg-santander-dark border border-transparent hover:border-santander-green/30 transition-all duration-200 cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="text-xs font-bold text-santander-gold">03</span>
+                                        <span class="text-sm font-semibold text-white">Sebastián Grandas: Adrenalina, saltos y perseverancia</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400">22:40 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Sponsor Section -->
+    <section id="contacto" class="py-24 relative overflow-hidden bg-santander-card/40">
+        <!-- Backdrop gradients -->
+        <div class="absolute left-1/4 bottom-0 w-96 h-96 bg-santander-gold/5 rounded-full blur-3xl animate-pulse-slow"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-xs uppercase tracking-widest text-santander-gold font-extrabold">¡Únete a la Causa!</h2>
+                    <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">Impulsemos juntos sus sueños</h3>
+                    <p class="text-gray-300">
+                        ¿Quieres sumarte como patrocinador, marca aliada, medio de comunicación, o eres un deportista que desea dar a conocer su historia? Escríbenos y ayúdanos a fortalecer el ecosistema deportivo de Santander.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-santander-green/30 p-3 rounded-xl text-santander-gold"><i class="fa-solid fa-envelope text-lg"></i></div>
+                            <div>
+                                <h5 class="text-sm font-bold text-white">Correo Electrónico</h5>
+                                <p class="text-sm text-gray-400">contacto@promesassantandereanas.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-santander-green/30 p-3 rounded-xl text-santander-gold"><i class="fa-solid fa-location-dot text-lg"></i></div>
+                            <div>
+                                <h5 class="text-sm font-bold text-white">Ubicación de Impacto</h5>
+                                <p class="text-sm text-gray-400">Santander, Colombia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:col-span-7">
+                    <div class="bg-santander-card border border-santander-green/40 p-6 sm:p-10 rounded-3xl shadow-xl">
+                        <h4 class="font-heading text-xl font-bold text-white mb-6">Formulario de Contacto / Apoyo</h4>
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-wider text-gray-300">Nombre Completo</label>
+                                    <input type="text" required placeholder="Ej. Carlos Mendoza" class="w-full bg-santander-dark border border-santander-green/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-santander-gold text-white transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-wider text-gray-300">Correo Electrónico</label>
+                                    <input type="email" required placeholder="Ej. correo@dominio.com" class="w-full bg-santander-dark border border-santander-green/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-santander-gold text-white transition-all">
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-300">¿Cómo quieres participar?</label>
+                                <select required class="w-full bg-santander-dark border border-santander-green/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-santander-gold text-white transition-all">
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="patrocinio">Quiero patrocinar/donar</option>
+                                    <option value="alianza">Alianza de marca o prensa</option>
+                                    <option value="atleta">Soy deportista / Quiero contar mi historia</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-300">Tu Mensaje</label>
+                                <textarea required rows="4" placeholder="Escribe aquí tu propuesta o mensaje de aliento..." class="w-full bg-santander-dark border border-santander-green/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-santander-gold text-white transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-santander-gold to-yellow-500 hover:scale-[1.02] text-santander-dark font-extrabold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-santander-gold/10">
+                                Enviar Mensaje <i class="fa-solid fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                        
+                        <!-- Success Message (Initially Hidden) -->
+                        <div id="form-success" class="hidden mt-4 p-4 bg-santander-green/30 border border-santander-green rounded-xl text-center text-sm text-white">
+                            <i class="fa-solid fa-circle-check text-santander-gold text-lg mr-2"></i> ¡Mensaje recibido con éxito! Nos pondremos en contacto pronto para seguir impulsando el deporte regional.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-santander-dark border-t border-santander-green/30 py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-santander-green/20">
+                <!-- Brand Info -->
+                <div class="flex items-center space-x-3">
+                    <img src="WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/150x150/005C3E/FFD700?text=PS';" 
+                         alt="Logo Promesas" class="h-12 w-12 rounded-full object-cover border-2 border-santander-gold cursor-pointer"
+                         onclick="openLightbox('WhatsApp Image 2026-06-19 at 1.50.06 PM.jpeg', 'Escudo Oficial', 'Promesas Santandereanas', 'Proyecto sin ánimo de lucro para consolidar el porvenir del deporte olímpico y extremo en la región de Santander.')">
+                    <div>
+                        <span class="font-heading text-md font-bold tracking-wider text-white block">PROMESAS</span>
+                        <span class="text-[10px] text-santander-gold font-semibold tracking-widest uppercase block">SANTANDEREANAS</span>
+                    </div>
+                </div>
+
+                <!-- Footer Quick Links -->
+                <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400 font-semibold">
+                    <a href="#inicio" class="hover:text-santander-gold transition-colors">Inicio</a>
+                    <a href="#sobre-nosotros" class="hover:text-santander-gold transition-colors">Sobre Nosotros</a>
+                    <a href="#atletas" class="hover:text-santander-gold transition-colors">Promesas</a>
+                    <a href="#podcast" class="hover:text-santander-gold transition-colors">Contenido</a>
+                </div>
+
+                <!-- Social Icon Grid -->
+                <div class="flex space-x-3">
+                    <a href="https://www.instagram.com/promesas_santandereanas?igsh=MTM1eHJzczJyNXUzeQ%3D%3D&utm_source=qr" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card border border-santander-green/50 hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300" aria-label="Instagram">
+                        <i class="fab fa-instagram text-lg"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@promesassantandereanas?_r=1&_t=ZS-97Lg2JEpWTc" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card border border-santander-green/50 hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300" aria-label="TikTok">
+                        <i class="fab fa-tiktok text-lg"></i>
+                    </a>
+                    <a href="https://open.spotify.com/show/033k5B9xaVOEMFF71iQrPd?si=8bMwEY2VSyioSYmjfa1WdA" target="_blank" class="h-10 w-10 flex items-center justify-center rounded-full bg-santander-card border border-santander-green/50 hover:border-santander-gold hover:text-santander-gold text-gray-300 transition-all duration-300" aria-label="Spotify">
+                        <i class="fab fa-spotify text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright and Pride Section -->
+            <div class="pt-8 text-center md:flex md:justify-between items-center text-xs text-gray-500 font-medium">
+                <p>© 2026 Promesas Santandereanas. Todos los derechos reservados.</p>
+                <p class="mt-2 md:mt-0 flex items-center justify-center md:justify-end text-gray-400">
+                    Hecho con <span class="text-santander-gold mx-1">💛</span> y <span class="text-emerald-500 mx-1">💚</span> por el futuro deportivo de Santander.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Interaction Scripts -->
+    <script>
+        // Toggle mobile hamburger menu navigation
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = 'fa-solid fa-xmark text-2xl';
+            } else {
+                menu.classList.add('hidden');
+                icon.className = 'fa-solid fa-bars text-2xl';
+            }
+        }
+
+        // About Us Tabs Switcher
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(element => {
+                element.classList.add('hidden');
+            });
+            // Reset all buttons styling
+            ['mision', 'vision', 'proposito'].forEach(id => {
+                const btn = document.getElementById(`btn-${id}`);
+                btn.className = "flex-1 min-w-[120px] px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 text-gray-400 hover:text-white";
+            });
+
+            // Show active tab content
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            // Stylize active tab button
+            document.getElementById(`btn-${tabId}`).className = "flex-1 min-w-[120px] px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 bg-santander-green text-white shadow-md border border-santander-green/50";
+        }
+
+        // Virtual Cheer Support Function with Canvas Confetti
+        function sendCheer(athleteKey) {
+            // Increment Cheer counter on UI
+            const cheerElement = document.getElementById(`cheer-count-${athleteKey}`);
+            let currentCount = parseInt(cheerElement.innerText.replace(/,/g, ''));
+            currentCount++;
+            cheerElement.innerText = currentCount.toLocaleString('en-US');
+
+            // Burst active confetti
+            confetti({
+                particleCount: 80,
+                spread: 60,
+                origin: { y: 0.8 },
+                colors: ['#005C3E', '#FFD700', '#ffffff', '#22c55e']
+            });
+
+            // Save state in browser memory
+            localStorage.setItem(`cheer_${athleteKey}`, currentCount);
+        }
+
+        // Load cheer data from LocalStorage if present
+        window.onload = function() {
+            ['gabriela', 'mariana', 'sebastian'].forEach(key => {
+                const saved = localStorage.getItem(`cheer_${key}`);
+                if (saved) {
+                    const el = document.getElementById(`cheer-count-${key}`);
+                    if (el) el.innerText = parseInt(saved).toLocaleString('en-US');
+                }
+            });
+        };
+
+        // Lightbox Functions for Athlete Photos
+        function openLightbox(imgSrc, name, tag, desc) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const titleEl = document.getElementById('lightbox-title');
+            const tagEl = document.getElementById('lightbox-tag');
+            const descEl = document.getElementById('lightbox-desc');
+
+            // Set content details
+            img.src = imgSrc;
+            // Handle error in Lightbox if image fails to load
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = `https://placehold.co/600x800/005C3E/FFD700?text=${encodeURIComponent(name)}`;
+            };
+            titleEl.innerText = name;
+            tagEl.innerText = tag;
+            descEl.innerText = desc;
+
+            // Display modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // block main scrolling
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // restore scrolling
+        }
+
+        // Close Lightbox when pressing ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Simulated Podcast Player variables
+        let isPlaying = false;
+        let progressInterval = null;
+        let progressPercent = 33; // Mock starting position
+        let currentSeconds = 105; // 01:45
+
+        function playPodcastSim() {
+            const playIcon = document.getElementById('play-btn-icon');
+            const wave = document.getElementById('wave-visualizer');
+            const progress = document.getElementById('sim-progress');
+            const timeLabel = document.getElementById('curr-time');
+
+            if (!isPlaying) {
+                // Play Simulation Started
+                isPlaying = true;
+                playIcon.className = 'fa-solid fa-pause text-lg';
+                wave.classList.remove('hidden');
+
+                progressInterval = setInterval(() => {
+                    if (progressPercent < 100) {
+                        progressPercent += 0.5;
+                        currentSeconds += 1;
+                        progress.style.width = progressPercent + '%';
+
+                        // Format seconds to text representation MM:SS
+                        const minutes = Math.floor(currentSeconds / 60);
+                        const remainder = currentSeconds % 60;
+                        timeLabel.innerText = `${minutes.toString().padStart(2, '0')}:${remainder.toString().padStart(2, '0')}`;
+                    } else {
+                        // Episode finished simulated
+                        clearInterval(progressInterval);
+                        resetPodcastPlayer();
+                    }
+                }, 1000);
+            } else {
+                // Pause simulation
+                isPlaying = false;
+                playIcon.className = 'fa-solid fa-play text-lg ml-1';
+                wave.classList.add('hidden');
+                clearInterval(progressInterval);
+            }
+        }
+
+        function resetPodcastPlayer() {
+            isPlaying = false;
+            progressPercent = 0;
+            currentSeconds = 0;
+            document.getElementById('play-btn-icon').className = 'fa-solid fa-play text-lg ml-1';
+            document.getElementById('wave-visualizer').classList.add('hidden');
+            document.getElementById('sim-progress').style.width = '0%';
+            document.getElementById('curr-time').innerText = '00:00';
+            if (progressInterval) clearInterval(progressInterval);
+        }
+
+        // Contact Form Submission Handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('form-success');
+
+            // Hide form inputs/button smoothly and display receipt
+            form.style.opacity = '0.4';
+            form.querySelectorAll('input, select, textarea, button').forEach(el => {
+                el.disabled = true;
+            });
+            successMsg.classList.remove('hidden');
+            
+            // Trigger victory confetti burst
+            confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+            confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+        }
+    </script>
+</body>
+</html>
